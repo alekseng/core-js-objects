@@ -51,8 +51,18 @@ function mergeObjects(/* objects */) {
  *    removeProperties({name: 'John', age: 30, city: 'New York'}, 'age') => {name: 'John', city: 'New York'}
  *
  */
-function removeProperties(/* obj, keys */) {
-  throw new Error('Not implemented');
+function removeProperties(obj, keys) {
+  const object1 = Object.entries(obj);
+  const obj2 = Object.assign(obj);
+
+  for (let i = 0; i < object1.length; i += 1) {
+    for (let j = 0; j < keys.length; j += 1) {
+      if (object1[i][0] === keys[j]) {
+        delete obj2[keys[j]];
+      }
+    }
+  }
+  return obj2;
 }
 
 /**
@@ -67,8 +77,19 @@ function removeProperties(/* obj, keys */) {
  *    compareObjects({a: 1, b: 2}, {a: 1, b: 2}) => true
  *    compareObjects({a: 1, b: 2}, {a: 1, b: 3}) => false
  */
-function compareObjects(/* obj1, obj2 */) {
-  throw new Error('Not implemented');
+function compareObjects(obj1, obj2) {
+  const object1 = Object.entries(obj1);
+  const object2 = Object.entries(obj2);
+
+  for (let i = 0; i < object1.length; i += 1) {
+    if (object1[i][0] !== object2[i][0]) {
+      return false;
+    }
+    if (object1[i][1] !== object2[i][1]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -82,8 +103,11 @@ function compareObjects(/* obj1, obj2 */) {
  *    isEmptyObject({}) => true
  *    isEmptyObject({a: 1}) => false
  */
-function isEmptyObject(/* obj */) {
-  throw new Error('Not implemented');
+function isEmptyObject(obj) {
+  if (Object.keys(obj).length === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
